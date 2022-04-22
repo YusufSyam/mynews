@@ -1,0 +1,61 @@
+{% extends '/base.html' %}
+
+{% block title %} Log In {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loginStyle.css') }}"> {% endblock %}
+
+{% block content %}
+{% for flash_category, flash_message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ flash_category }} myAlert" role="alert">
+	{{ flash_message }}
+</div>
+{% endfor %}
+<div class="center">
+	<div class="headerSection">
+		<h4>Log In</h4>
+	</div>
+	<form method="post">
+		<div class="loginInputContainer">
+			<div class="form-group myInput">
+				<label>Username</label>
+				<input type="text" class="form-control" placeholder="Enter Your Username" required name="username">
+			</div>
+			<div class="form-group myInput" id="show_hide_password">
+				<label for="password">Input Password</label>
+				<div class="input-group">
+					<input type="password" id="password" class="form-control" placeholder="Input Pasword . . ."
+						name="password" required>
+					<div class="input-group-addon hidePasswordToggle">
+						<a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="buttonSection">
+			<div>
+				<button type="submit" class="btn btn-primary myButton">Login</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}
+
+{% block additional_script %}
+<script>
+	$(document).ready(function () {
+		$("#show_hide_password a").on('click', function (event) {
+			event.preventDefault();
+			if ($('#show_hide_password input').attr("type") == "text") {
+				$('#show_hide_password input').attr('type', 'password');
+				$('#show_hide_password i').addClass("fa-eye-slash");
+				$('#show_hide_password i').removeClass("fa-eye");
+			} else if ($('#show_hide_password input').attr("type") == "password") {
+				$('#show_hide_password input').attr('type', 'text');
+				$('#show_hide_password i').removeClass("fa-eye-slash");
+				$('#show_hide_password i').addClass("fa-eye");
+			}
+		});
+	});
+</script>
+{% endblock %}

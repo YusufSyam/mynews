@@ -1,0 +1,45 @@
+{% extends '/base.html' %}
+
+{% block title %} Input Category {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inputCategoryStyle.css') }}"> {% endblock %}
+
+{% block content %}
+{% for flash_category, flash_message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ flash_category }} myAlert" role="alert">
+    {{ flash_message }}
+</div>
+{% endfor %}
+<div class="inputHeaderSection">
+    <div class="backButton" onclick="location.href=`{{ url_for('manage_categories' )}}`;"><i
+            class="fas fa-angle-left"></i></div>
+    <h4>Insert New Category</h4>
+</div>
+
+<form class="inputSection" method="POST" enctype="multipart/form-data" action="{{url_for('inserting_category')}}">
+    <div class="containerInput">
+        <div class="form-group myInput">
+            <label>Available Category</label>
+            <hr style="margin-top: 2px;">
+            <div class="categoryList">
+                {% for i in category_list %}
+                <div class="perCategory">
+                    <i class="fas fa-circle"></i>
+                    <span>{{i.category}}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-group myInput">
+            <label for="ketegori">Input New Category</label>
+            <input type="text" id="ketegori" class="form-control" placeholder="Insert a new category" name="category">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary myButton">Submit</button>
+</form>
+{% endblock %}
+
+{% block additional_script %}
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends '/base.html' %}
+
+{% block title %} {% if (submit_type=='input_news') %}Write{% else %}Update{% endif %} News {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inputNewsStyle.css') }}"> {% endblock %}
+
+{% block content %}
+<div class="inputHeaderSection">
+    <div class="backButton" onclick="location.href='{{url_for('manage_news')}}';"><i class="fas fa-angle-left"></i>
+    </div>
+    <h4>{% if (submit_type=='input_news') %}Write{% else %}Update{% endif %} News</h4>
+</div>
+
+<form class="inputSection" method="POST" enctype="multipart/form-data"
+    action="{% if (submit_type=='input_news') %} {{url_for('inserting_news')}} {% else %}{{url_for('updating_news', news_id=selected_data.pk)}} {% endif %} ">
+    <div class="containerInput">
+        <div class="split">
+            <div class="inputLeftSide">
+                <div class="form-group myInput">
+                    <label for="judul">News Title</label>
+                    <input type="text" id="judul" class="form-control" required name="title"
+                        placeholder="Input news title . . ."
+                        value="{% if submit_type=='update_news' %}{{selected_data.title}}{% endif %}">
+                </div>
+
+                <div class="form-group myInput">
+                    <label for="kategori">Category</label>
+                    <select class="form-select" id="kategori" name='category' required>
+                        <option {% if (submit_type=='input_news' ) %} selected {% endif %}>Choose Category . . .
+                        </option>
+                        {% for i in possible_categories %}
+                        <!--                            <option value="{{i.category}}" {% if (submit_type=='update_news' and i.category==selected_data.category) %} selected {% endif %}> {{i.category}} </option>-->
+                        <option value="{{i.category}}"> {{i.category}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group myInput">
+                    <label for="date">Uploaded Date</label>
+                    <input type="date" class="form-control" required name="uploaded_date" id="date"
+                        value="{% if submit_type=='update_news' %}{{selected_data.uploaded_date}}{% endif %}">
+                </div>
+
+                <div class="form-group myInput">
+                    <label for="tags">Tags</label>
+                    <input type="text" id="tags" class="form-control" required name="tags"
+                        placeholder="Input tags separated by comma . . ."
+                        value="{% if submit_type=='update_news' %}{% for i in selected_data.tags %}{{i}}{% if i!=selected_data.tags[-1] %}, {% endif %}{% endfor %}{% endif %}">
+                </div>
+
+                <!--                    <div class="form-group myInput">-->
+                <!--                        <label for="penulis">Penulis</label>-->
+                <!--                        <input type="text" id="penulis" class="form-control" required name="writer" placeholder="Masukkan Penulis . . ." value="">-->
+                <!--                    </div>-->
+            </div>
+            <div class="inputRightSide">
+                <div class="form-group myInput">
+                    <label for="gambar">Image</label>
+                    <input class="form-control" type="file" id="gambar" accept="image/*" onChange="img_pathUrl(this);"
+                        name="file">
+                    <img src="" alt="" class="displayImage">
+                </div>
+            </div>
+        </div>
+        <div class="form-group myInput">
+            <label for="isiBerita">Content</label>
+            <textarea class="form-control" required id="isiBerita" rows="10" placeholder="Input news content"
+                name="content">{% if submit_type=='update_news' %}{{selected_data.content}}{% endif %}</textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary myButton">Submit</button>
+</form>
+
+{% endblock %}
+
+{% block additional_script %}
+<script>
+    // Function to display image after upload
+    function img_pathUrl(input) {
+        var path = (window.URL || window.webkitURL).createObjectURL(input.files[0]);
+        img = document.querySelector('img')
+        img.src = path
+        img.style.display = 'inline'
+    }
+
+    {%if submit_type == 'update_news' %}
+    // To define selected dropdown category value
+    var select_category = document.querySelector('#kategori');
+    select_category.value = '{{selected_category}}'
+
+    // To display image if updated
+    img = document.querySelector('img')
+    img.src = "{{ url_for('static', filename= image_path) }}{{ selected_data.img_path }}"
+    img.style.display = 'inline'
+    {% endif %}
+</script>
+{% endblock %}

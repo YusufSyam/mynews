@@ -1,0 +1,100 @@
+{% extends '/base.html' %}
+
+{% block title %} Admin Dashboard {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminDashboardStyle.css') }}"> {% endblock %}
+
+{% block content %}
+{% for flash_category, flash_message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ flash_category }} myAlert" role="alert">
+    {{ flash_message }}
+</div>
+{% endfor %}
+<div class="ADContainer">
+    <div class="ADHeaderSection">
+        <div class="headerLogo"><span class="logo"><span>my</span><span>news</span></span><i
+                class="fa-solid fa-circle"></i><span class="subTitle">Admin Page</span></div>
+        <div class="headerImage">
+            <img
+                src="{{ url_for('static', filename= image_path) }}{% if user.profile_pict_path=='' %}{{ no_profile_picture_path }}{% else %}{{ user.profile_pict_path }}{% endif %}">
+        </div>
+        <div class="headerDesc">
+            <span class="tab"></span>
+            Welcome to admin page {{ user.username }}, admin page / dashboard
+            is the place to manage (ie add, edit or delete) news, other users, and categories, and also to edit ur own
+            profile.
+            If you are logged in as a writer, then you can only write news and manage news that you have written
+            yourself.
+            Your authority: <strong>{{user.authority}}</strong>.
+        </div>
+
+        <a href="{{ url_for('update_user', user_id=user.pk) }}" class="manageNewsMore">
+            <i class="fa-solid fa-user-pen"></i>
+            <span>Edit Profile</span>
+        </a>
+    </div>
+    <div class="manageSection">
+        <div class="manageHeader">
+            <h4>Manage News</h4>
+            <hr>
+        </div>
+        <div class="manageDesc">
+            <span class="tab"></span>
+            Click the 'Manage News' button to manage news, or 'Write News' button to write a news. If you are logged in
+            as a writer, then you can only write news and manage news that you have written yourself.
+        </div>
+        <a href="{{ url_for('manage_news') }}" class="manageNewsMore">
+            <i class="fa-solid fa-bars-progress"></i>
+            <span>Manage News</span>
+        </a>
+        <a href="{{ url_for('input_news') }}" class="manageNewsMore">
+            <i class="fa-solid fa-plus"></i>
+            <span>Write News</span>
+        </a>
+    </div>
+    {% if is_admin %}
+    <div class="manageSection">
+        <div class="manageHeader">
+            <h4>Manage Users</h4>
+            <hr>
+        </div>
+        <div class="manageDesc">
+            <span class="tab"></span>
+            Click the 'Manage Users' button to manage users, or 'Add New User' button to add a new user.
+        </div>
+        <a href="{{ url_for('manage_users') }}" class="manageNewsMore">
+            <i class="fa-solid fa-bars-progress"></i>
+            <span>Manage Users</span>
+        </a>
+        <a href="{{ url_for('input_user') }}" class="manageNewsMore">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add a New User</span>
+        </a>
+    </div>
+    <div class="manageSection">
+        <div class="manageHeader">
+            <h4>Manage Categories</h4>
+            <hr>
+        </div>
+        <div class="manageDesc">
+            <span class="tab"></span>
+            Click the 'Manage Categories' button to manage categories, or 'Add New Category' button to add a new
+            category.
+        </div>
+        <a href="{{ url_for('manage_categories') }}" class="manageNewsMore">
+            <i class="fa-solid fa-bars-progress"></i>
+            <span>Manage Categories</span>
+        </a>
+        <a href="{{ url_for('input_category') }}" class="manageNewsMore">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add New Category</span>
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block additional_script %}
+
+{% endblock %}

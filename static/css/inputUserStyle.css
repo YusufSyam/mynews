@@ -1,0 +1,128 @@
+.inputHeaderSection{
+    width: 48%;
+    margin: auto;
+}
+
+.inputHeaderSection .backButton{
+    position: absolute;
+    margin-left: -60px;
+    padding: 5px 14px 5px 12px;
+    border-radius: 100px;
+    border: 2px solid #99A799;
+    transition: 500ms ease;
+}
+
+.inputHeaderSection .backButton:hover{
+    border: 2px solid transparent;
+    background-color: #99A799;
+    color: white;
+}
+
+.inputHeaderSection h4{
+	margin: 10px 0 20px;
+	font-weight: bold;
+}
+
+.inputSection{
+    display: flex;
+    flex-direction: column;
+}
+
+.containerInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto 50px;
+    width: 48%;
+}
+
+.categoryList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.perCategory i{
+    font-size: 14px;
+    color: #99A799;
+}
+
+.perCategory span{
+    margin: -1px 12px 0 2px;
+}
+
+.containerInput .myInput{
+    margin-top: 20px !important;
+}
+
+.form-control, .form-control:focus, .form-control:enabled, .form-control:active, .form-select, .form-select:focus, .form-select:enabled, .form-select:active{
+    border-color: lightgray !important;
+    border-width: 1px !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(0, 0, 0, 0) !important;
+}
+
+.inputImageContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.leftImageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.rightImageContainer{
+    width: 48%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.displayImage{
+    margin-top: 20px !important;
+    width: 240px !important;
+    height: 240px !important;
+    object-fit: cover;
+    overflow: auto;
+    margin: 20px auto 0 !important;
+    border: 4px solid #99A799 !important;
+    border-radius: 400px;
+}
+
+.containerInput .myInput:nth-last-child(1){
+    margin-bottom: 20px;
+}
+
+.containerInput .myInput label{
+    margin-bottom: 5px;
+}
+
+.myButton{
+    width: 100px;
+    margin: auto;
+    background-color: white !important;
+    color: #6f796f !important;
+    border: 2px solid #99A799 !important;
+    border-radius: 20px !important;
+    transition: 500ms ease !important;
+}
+
+.myButton:hover{
+    background-color: #99A799 !important;
+    color: white !important;
+}
+
+.hidePasswordToggle{
+    width: 45px !important;
+    background-color: rgb(228, 228, 228);
+    /* padding: 5px; */
+    padding-top: 7px;
+    text-align: center;
+
+}
+
+.hidePasswordToggle a, .hidePasswordToggle:hover a{
+    color:#555;
+}

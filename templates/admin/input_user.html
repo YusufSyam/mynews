@@ -1,0 +1,94 @@
+{% extends '/base.html' %}
+
+{% block title %} {% if (submit_type=='input_user') %}Insert{% else %}Update{% endif %} User {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/inputUserStyle.css') }}"> {% endblock %}
+
+{% block content %}
+<div class="inputHeaderSection">
+    <div class="backButton" onclick="location.href='{{url_for('manage_users')}}';"><i class="fas fa-angle-left"></i>
+    </div>
+    <h4>{% if (submit_type=='input_user') %}Insert{% else %}Update{% endif %} User</h4>
+</div>
+<form class="inputSection" method="POST" enctype="multipart/form-data"
+    action="{% if (submit_type=='input_user') %} {{url_for('inserting_user')}} {% else %}{{url_for('updating_user', user_id=selected_user.pk)}} {% endif %}">
+    <div class="containerInput">
+        <div class="form-group myInput">
+            <label for="username">Input Username</label>
+            <input type="text" id="username" class="form-control" placeholder="Input Username . . ." name="username"
+                required value="{% if submit_type=='update_user' %}{{selected_user.username}}{% endif %}">
+        </div>
+        <div class="form-group myInput" id="show_hide_password">
+            <label for="password">Input Password</label>
+            <div class="input-group">
+                <input type="password" id="password" class="form-control" placeholder="Input Pasword . . ."
+                    name="password" required
+                    value="{% if submit_type=='update_user' %}{{selected_user.password}}{% endif %}">
+                <div class="input-group-addon hidePasswordToggle">
+                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group myInput">
+            <label for="authority">Authority</label>
+            <select class="form-select" id="authority" name='authority' required>
+                <option value="writer" selected>Writer</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+        <div class="inputImageContainer">
+            <div class="leftImageContainer">
+                <div class="form-group myInput">
+                    <label for="image">Profile Picture</label>
+                    <input class="form-control" type="file" id="image" accept="image/*" onChange="img_pathUrl(this);"
+                        name="file">
+                </div>
+            </div>
+            <div class="rightImageContainer">
+                <img src="{{ url_for('static', filename= image_path) }}{% if submit_type=='update_user' %}{{ selected_user.profile_pict_path }}{% else %}{{ no_profile_picture_path }}{% endif %}"
+                    alt="" class="displayImage">
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary myButton">Submit</button>
+</form>
+{% endblock %}
+
+{% block additional_script %}
+<script type='text/javascript' src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+<script>
+    // Toggle password visibility
+    $(document).ready(function () {
+        $("#show_hide_password a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#show_hide_password input').attr("type") == "text") {
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').addClass("fa-eye-slash");
+                $('#show_hide_password i').removeClass("fa-eye");
+            } else if ($('#show_hide_password input').attr("type") == "password") {
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass("fa-eye-slash");
+                $('#show_hide_password i').addClass("fa-eye");
+            }
+        });
+    });
+
+    // Function to display image after upload
+    function img_pathUrl(input) {
+        var path = (window.URL || window.webkitURL).createObjectURL(input.files[0]);
+        img = document.querySelector('img')
+        img.src = path
+        img.style.display = 'inline'
+    }
+
+    {%if submit_type == 'update_user' %}
+    // To define selected dropdown category value
+    var select_category = document.querySelector('#authority');
+    select_category.value = '{{selected_user.authority}}'
+    {% endif %}
+</script>
+
+{% endblock %}

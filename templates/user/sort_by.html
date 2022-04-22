@@ -1,0 +1,109 @@
+{% extends '/base.html' %}
+
+{% block title %} Sort By {{type}} {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sortByStyle.css') }}"> {% endblock %}
+
+{% block content %}
+<div class="sortByHeaderSection">
+	<h3><span><i class="fa-solid fa-sort"></i></span>{{header_prefix}}{{' '.join(type.split('_'))}}</h3>
+</div>
+
+{% if type=='category' %}
+<div class="mainContainer">
+	<div class="categorySection">
+		<div class="categoryList">
+			{% for idx, i in category_list %}
+			<div class="perCategory">
+				<a href="{{url_for('news_with', type= 'category', sub_type=i.category)}}">
+					<span>{{i.category}}</span>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% elif type=='tags' %}
+	<div class="tagSection">
+		<div class="tagList">
+			{% for tag in tag_list %}
+			<div class="perTag">
+				<a href="{{url_for('news_with', type= 'tags', sub_type= tag['_id'])}}">
+					<span>{{tag['_id']}}</span>
+					<span>{{tag['count']}}</span>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+
+	{% for idx, i in selected_data %}
+	<div class="newsSection">
+
+		<div class="newsHeader">
+			<h4><span>{{sorted_by[idx]}}</span></h4>
+		</div>
+		<div class="newsBody">
+			{% for j in i%}
+			<div class="newsContainer">
+				<div class="card myCard" style="width: 18rem;">
+					<img src="{{ url_for('static', filename= image_path) }}{% if j.img_path=='' %}{{ no_image_path }}{% else %}{{ j.img_path }}{% endif %}"
+						class="card-img-top myCardImage">
+					<div class="myCardGradient"></div>
+					<div class="myCardImageAlt">my<span>news</span> image</div>
+					<div class="card-title myCardTitle"><span>{{j.title}}</span></div>
+					<div class="card-body myCardText">
+						<p class="card-text">{{j.content}}<a href="{{url_for('read_news', news_id= j.pk)}}"> Read
+								News</a>
+						</p>
+						<div class="myCardDate">{{j.uploaded_date}}</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endfor %}
+
+	{% endblock %}
+
+	{% block additional_script %}
+	<script>
+		// Slice paragraph if word gt 20
+		document.querySelectorAll('.newsContainer p').forEach(function (item) {
+			textList = item.innerText.split(' ')
+			if (textList.length > 22) {
+				link = item.innerHTML.slice(item.innerHTML.search(/<a href=/i))
+				textList = textList.slice(0, textList.length - 1).slice(0, 20)
+
+				item.innerHTML = textList.join(' ') + ' . . . ' + link
+			}
+		});
+
+		// Title to bottom if title just one row
+		document.querySelectorAll('.myCardTitle').forEach(function (item) {
+			if (item.innerText.length < 37) {
+				item.style.top = "55%"
+			}
+		});
+
+		// Cat list color randomizer
+		document.querySelectorAll('.perCategory').forEach(function (item) {
+			random = Math.floor(Math.random() * 4)
+
+			if (random == 0) {
+				item.style.backgroundColor = '#D3E4CD'
+			} else if (random == 1) {
+				item.style.backgroundColor = '#F2DDC1'
+			} else if (random == 2) {
+				item.style.backgroundColor = '#99A799';
+				item.querySelector('span').style.color = 'white'
+			} else if (random == 3) {
+				item.style.backgroundColor = '#E2C2B9'
+			} else {
+				item.style.backgroundColor = '#D3E4CD'
+			}
+		});
+	</script>
+	{% endblock %}

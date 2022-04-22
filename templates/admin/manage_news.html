@@ -1,0 +1,84 @@
+{% extends '/base.html' %}
+
+{% block title %} Manage News {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manageNewsStyle.css') }}"> {% endblock %}
+
+{% block content %}
+{% for flash_category, flash_message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ flash_category }} myAlert" role="alert">
+    {{ flash_message }}
+</div>
+{% endfor %}
+<div class="manageHeaderSection">
+    <h3>Manage News</h3>
+</div>
+<div class="container">
+    <div class="inputActionContainer">
+        <a class="myAction myInput" href="{{ url_for('input_news') }}"><span>Write News</span></a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Category</th>
+                <!--                        <th>Uploaded Date</th>-->
+                <th>Author</th>
+                <th>News Content</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for idx, i in news %}
+            <tr>
+                <td>
+                    <img style="object-fit:cover; width: 200px; height: 130px;"
+                        src="{{ url_for('static', filename= image_path) }}{% if i.img_path=='' %}{{ no_image_path }}{% else %}{{ i.img_path }}{% endif %}">
+                </td>
+                <td class="manageTitle">{{i.title}}</td>
+                <td>{{categories[idx].category}}</td>
+                <!--                                <td>{{i.uploaded_date}}</td>-->
+                <td>{{writer[idx].username}}</td>
+                <td class="content">
+                    {{i.content}}
+                </td>
+                <td class="actionContainer">
+                    <form action="{{url_for('update_news', news_id=i.pk)}}" method="post" class="d-inline">
+                        <button type="submit" class="myAction myUpdate">Edit</button>
+                    </form>
+
+                    <a class="myAction myUpdate"
+                        href="{{url_for('deleting_news', news_id=i.pk)}}"><span>Delete</span></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block additional_script %}
+<script>
+    // Cut title if char>100
+    document.querySelectorAll('.manageTitle').forEach(function (item) {
+        console.log(item.innerText.length)
+        console.log(item.style.width)
+        if (item.innerText.length > 100) {
+            item.innerHTML = '<span>' + item.innerText.slice(0, 100) + ' -' + '</span>'
+        }
+    });
+
+    // Slice paragraph if word gt 20
+    document.querySelectorAll('.content').forEach(function (item) {
+        textList = item.innerText.split(' ')
+        if (textList.length > 20) {
+            textList = textList.slice(0, textList.length - 1).slice(0, 20)
+
+            item.innerHTML = textList.join(' ') + ' . . . '
+        }
+    });
+</script>
+{% endblock %}

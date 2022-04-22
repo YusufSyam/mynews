@@ -1,0 +1,114 @@
+.manageHeaderSection h3{
+    font-weight: bold;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.inputActionContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-self: baseline;
+    height: 100%;
+}
+
+.inputActionContainer .myAction{
+    width: 140px;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    transition: ease-out 0.3s;
+    outline: none;
+    color: #666;
+    text-decoration: none !important;
+    text-align: center;
+    background-color: white;
+    margin-right: 15px;
+    margin-bottom: 40px;
+}
+
+.inputActionContainer a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.myInput{
+   width: 160px !important;
+    border: 2px solid #99A799 !important;
+    box-shadow: inset 0 0 0 0 #99A799;
+    background-color: #99A799 ;
+    color: white;
+}
+
+.myInput:nth-child(1){
+    margin-bottom: 5px;
+}
+
+.myInput:hover {
+    box-shadow: inset 140px 0 0 0 #D3E4CD;
+    border: 2px solid #D3E4CD !important;
+    cursor: pointer;
+    color: black;
+}
+
+.actionContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: baseline;
+    height: 100%;
+}
+
+.actionContainer .myAction{
+    width: 70px;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px;
+    transition: ease-out 0.3s;
+    outline: none;
+    color: #666;
+    text-decoration: none !important;
+    text-align: center;
+    background-color: white;
+}
+
+.actionContainer a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myUpdate:nth-child(1){
+    border: 2px solid #F2DDC1 !important;
+    box-shadow: inset 0 0 0 0 #F2DDC1;
+    margin-bottom: 5px;
+}
+
+.myUpdate:nth-child(2){
+    border: 2px solid #E8837C !important;
+    box-shadow: inset 0 0 0 0 #E8837C;
+}
+
+.myUpdate:nth-child(1):hover {
+    box-shadow: inset 140px 0 0 0 #F2DDC1;
+    cursor: pointer;
+    color: black;
+}
+
+.myUpdate:nth-child(2):hover {
+    box-shadow: inset 140px 0 0 0 #E8837C;
+    cursor: pointer;
+    color: black;
+}
+
+
+table td{
+  height: 100%;
+  min-height: 150px;
+  vertical-align: middle !important;
+}

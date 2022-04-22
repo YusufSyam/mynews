@@ -1,0 +1,260 @@
+body{
+    font-family: Poppins, sans-serif !important;
+}
+
+*{
+    box-sizing: border-box !important;
+}
+
+.navbar-default{
+    background-color: transparent;
+    transition: 1000ms ease;
+    display: flex;
+    flex-wrap: wrap;
+    /*
+    align-items: center; */
+    justify-content: space-between;
+    height: 80px;
+    padding: 20px 20px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 999;
+    /*animation: drop 1.2s 1;*/
+    /*background-color: green;*/
+    box-shadow: 0 1px 20px rgb(209, 209, 209);
+    cursor: context-menu;
+  }
+
+  .leftNavbar{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .navbar-default.scrolled{
+    background-color: rgba(255,255,255,1);
+    height: 80px;
+    padding: 20px 20px;
+    position: fixed;
+    top: 0px;
+    color: black;
+    transition:500ms ease;
+  }
+  
+  .navbar-default .nav-items{
+    display: flex;
+    flex: 1;
+    padding: 0 0 0 40px;
+    align-self: center;
+  }
+  
+  .navbar-default .nav-items li{
+    list-style: none !important;
+  }
+  
+  .navbar-default .nav-items .navButton{
+    padding: 0 15px !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+    border: none !important;
+  }
+  
+  .leftNavbar .nav-items li:nth-last-child(1){
+    margin-top: -1px;
+    border: none !important;
+  }
+  
+  .navbar-default .nav-items div .navButton:focus,  .navbar-default .nav-items div .navButton:enabled{
+    color: black;
+    border-color: red !important;
+    border: none !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(0, 0, 0, 0);
+  }
+  
+  .navbar-default a{
+    transition:500ms ease;
+    font-family: 'Trebuchet MS', sans-serif;
+    color: black;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .navbar-default.scrolled a{
+    color: black;
+  }
+  
+  .navbar-default a:hover{
+    /* color: rgb(255,252,142); */
+    color: black;
+  } 
+  
+  .navbar-default.scrolled a:hover{
+    /* color: rgb(160,160,160); */
+    color: black;
+  }	
+  
+  .icon{
+      color: black;
+  }
+  
+  .headerSection h1{
+    transition:500ms ease;
+      font-family: 'Brush Script MT', cursive;
+      margin: 0 20px;
+      font-weight: bold;
+  }
+  
+  .headerSection h1 span:nth-child(2){
+    color: #E2C2B9;
+  }
+  
+  .login{
+      margin-right: 20px;
+  }
+  
+  .login span{
+    font-size: 16px;
+    color: white !important;
+    background-color: #99A799;
+    padding: 8px 16px;
+    border-radius: 100px;
+  }
+
+  /*
+  .login span{
+      font-size: 18px;
+    color: #666;
+    padding: 6px 0;
+      /* margin-left: 5px;
+  }
+  */
+
+.myAlert{
+    width: 50% !important;
+    margin: -20px auto 60px !important;
+}
+
+  .marginTop{
+    margin-top:60px;
+  }
+
+.footer{
+    height: 200px;
+    margin-top: 80px;
+    border-top: 4px solid #E2C2B9;
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footerAboutUs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+}
+
+.aboutUsTitle{
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.aboutUsDesc{
+    font-size: 14px;
+}
+
+.footerLogoCopyright{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 50px;
+    width: 30%;
+}
+
+.footerLogo div{
+  transition:500ms ease;
+  font-family: 'Brush Script MT', cursive;
+  margin-top: -40px;
+  font-weight: bold;
+  font-size: 80px;
+  text-align:center;
+}
+
+.footerLogo div span:nth-child(2){
+    color: #E2C2B9;
+}
+
+.footerCopyright{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.footerCopyright span{
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+}
+
+.footerConnectWithUs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+}
+
+.footerConnectWithUs .connectTitle{
+    text-align: center;
+}
+
+.footerConnectWithUs .connectButtonContainer{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.footerConnectWithUs .connectButtonContainer a{
+    width: 40px;
+    height: 40px;
+    padding: 7px 5px 5px;
+    box-sizing: border-box;
+    margin: 2px 6px;
+    border-radius: 100px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.connectFacebook{
+  background: #3B5998;
+  color: white;
+}
+
+.connectYoutube{
+  background: #bb0000;
+  color: white;
+}
+
+.connectInstagram{
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  color: white;
+  font-size: 22px !important;
+  padding-top: 5px !important;
+}
+
+.connectLinkedIn{
+  background: #007bb5;
+  color: white;
+}
+
+.connectTwitter{
+  background: #55ACEE;
+  color: white;
+}
+
+.footerConnectWithUs .connectButtonContainer a:hover{
+    color: white !important;
+}
+
+

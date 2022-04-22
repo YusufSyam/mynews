@@ -1,0 +1,195 @@
+{% extends '/base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/homeStyle.css') }}"> {% endblock %}
+
+{% block content %}
+<div class="mainContainer">
+	{% for flash_category, flash_message in get_flashed_messages(with_categories=True) %}
+	<div class="alert alert-{{ flash_category }} myAlert" role="alert">
+		{{ flash_message }}
+	</div>
+	{% endfor %}
+	<div class="homeHeaderSection">
+		<div class="headerLogo"><span>my</span><span>news</span></div>
+		<div class="headerDesc">
+			<span class="tab"></span>
+			mynews is a news website that is always updated about criminal events, sports, law, politics, etc. at
+			country Indonesia and abroad,
+			which is presented in a concise, clear, and credible manner.
+			Mynews news site is purely dedicated to the dissemination of information without bias to one side.
+			News topics include:
+		</div>
+		<div class="categorySection">
+			<div class="categoryList">
+				{% for idx, i in category_list %}
+				<div class="perCategory">
+					<a href="{{url_for('news_with', type= 'category', sub_type=i.category)}}">
+						<span>{{i.category}}</span>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<div class="newsSection">
+		<div class="newsHeader">
+			<h4><span>Latest News</span></h4>
+		</div>
+		<div class="newsBody">
+			{% for i in latest_news %}
+			<div class="newsContainer">
+				<div class="card myCard" style="width: 18rem;">
+					<img src="{{ url_for('static', filename= image_path) }}{% if i.img_path=='' %}{{ no_image_path }}{% else %}{{ i.img_path }}{% endif %}"
+						class="card-img-top myCardImage">
+					<div class="myCardGradient"></div>
+					<div class="myCardImageAlt">my<span>news</span> image</div>
+					<div class="card-title myCardTitle"><span>{{ i.title }}</span></div>
+					<div class="card-body myCardText">
+						<p class="card-text">
+							{{ i.content }}<a href="{{url_for('read_news', news_id= i.pk)}}"> Read News</a>
+						</p>
+						<div class="myCardDate"> {{ i.uploaded_date }} </div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		<div class="paginationContainer">
+			<nav aria-label="...">
+				<ul class="pagination myPagination">
+
+					{% set substract_page= page-1 %}
+					<li class="page-item {% if substract_page<1 %}disabled{% endif %} paginationPointer">
+						<a class="page-link" href="{{url_for('home', page= substract_page)}}" aria-label="Previous">
+							<span aria-hidden="true"><i class="fa-solid fa-caret-left"></i></span>
+						</a>
+					</li>
+					{% for i in range(pagination_num) %}
+					<li class="page-item paginationNumber {% if (i+1)==page %}active{% endif %}">
+						<a class="page-link" href="{{url_for('home', page= (i+1))}}">{{i+1}}</a>
+					</li>
+					{% endfor %}
+					<!--						<li class="page-item paginationNumber">-->
+					<!--							<a class="page-link" href="#">2</a>-->
+					<!--						</li>-->
+					<!--						<li class="page-item active paginationNumber"><a class="page-link" href="#">3</a></li>-->
+					{% set add_page= page+1 %}
+					<li class="page-item {% if add_page>pagination_num %}disabled{% endif %} paginationPointer">
+						<a class="page-link" href="{{url_for('home', page= add_page)}}" aria-label="Next">
+							<i class="fa-solid fa-caret-right"></i>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="newsSection">
+		<div class="newsHeader">
+			<h4><span>Most Popular News</span></h4>
+		</div>
+		<!--			<div class="newsDesc">-->
+		<!--				<span class="tab"></span>-->
+		<!--				Most popular news today at {{curr_date}}-->
+		<!--			</div>-->
+		<div class="newsBody">
+			{% for i in most_popular_news %}
+			<div class="newsContainer">
+				<div class="card myCard" style="width: 18rem;">
+					<img src="{{ url_for('static', filename= image_path) }}{% if i.img_path=='' %}{{ 'default.JPG' }}{% else %}{{ i.img_path }}{% endif %}"
+						class="card-img-top myCardImage">
+					<div class="myCardGradient"></div>
+					<div class="myCardImageAlt">my<span>news</span> image</div>
+					<div class="card-title myCardTitle"><span>{{ i.title }}</span></div>
+					<div class="card-body myCardText">
+						<div class="myCardDate"> {{ i.uploaded_date }} </div>
+						<p class="card-text">
+							{{ i.content }}<a href="{{url_for('read_news', news_id= i.pk)}}"> Read News</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="tagSection">
+		<div class="tagHeader">
+			<h4><span>Most Popular Tags</span></h4>
+		</div>
+		<div class="tagList">
+			{% for tag in highest_tags %}
+			<div class="perTag">
+				<a href="{{url_for('news_with', type= 'tags', sub_type= tag['_id'])}}">
+					<span>{{tag['_id']}}</span>
+					<span>{{tag['count']}}</span>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+		<a href="{{ url_for('sort_by', type='tags') }}" class="tagMore">
+			<i class="fa-solid fa-play"></i>
+			<span>View All Tags </span>
+		</a>
+
+	</div>
+
+</div>
+
+{% endblock %}
+
+{% block additional_script %}
+<script>
+	// Cut title if char>73
+	document.querySelectorAll('.myCardTitle').forEach(function (item) {
+		console.log(item.innerText.length)
+		console.log(item.style.width)
+		if (item.innerText.length > 73) {
+			item.innerHTML = '<span>' + item.innerText.slice(0, 73) + ' -' + '</span>'
+		}
+	});
+
+	// Slice paragraph if word gt 20
+	document.querySelectorAll('.newsContainer p').forEach(function (item) {
+		textList = item.innerText.split(' ')
+		if (textList.length > 22) {
+			link = item.innerHTML.slice(item.innerHTML.search(/<a href=/i))
+			textList = textList.slice(0, textList.length - 1).slice(0, 20)
+
+			item.innerHTML = textList.join(' ') + ' ...' + link
+		}
+	});
+
+	// Title to bottom if title just one row
+	document.querySelectorAll('.myCardTitle').forEach(function (item) {
+		if (item.innerText.length < 37) {
+			item.style.top = "58%"
+		}
+	});
+
+	// Cat list color randomizer
+	document.querySelectorAll('.perCategory').forEach(function (item) {
+		random = Math.floor(Math.random() * 4)
+
+		if (random == 0) {
+			item.style.backgroundColor = '#D3E4CD'
+		} else if (random == 1) {
+			item.style.backgroundColor = '#F2DDC1'
+		} else if (random == 2) {
+			item.style.backgroundColor = '#99A799';
+			item.querySelector('span').style.color = 'white'
+		} else if (random == 3) {
+			item.style.backgroundColor = '#E2C2B9'
+		} else {
+			item.style.backgroundColor = '#D3E4CD'
+		}
+	});
+
+</script>
+
+{% endblock %}

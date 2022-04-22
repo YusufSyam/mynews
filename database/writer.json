@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "62545b5f7be5405255f1cab5"
+  },
+  "username": "admin",
+  "password": "1234",
+  "authority": "admin",
+  "profile_pict_path": "1_3.jpg"
+},{
+  "_id": {
+    "$oid": "62545b887be5405255f1cab6"
+  },
+  "username": "Nilam Magfirah",
+  "password": "yoasobi2",
+  "authority": "writer",
+  "profile_pict_path": "39wmItIWsg5sZMyRUHLkWBcuVCM.jpg"
+},{
+  "_id": {
+    "$oid": "6257b6ecc29536eb0385e9b2"
+  },
+  "username": "Ikram Fauzan",
+  "password": "1234",
+  "authority": "writer",
+  "profile_pict_path": "WhatsApp_Image_2021-10-09_at_22.27.37.jpeg"
+},{
+  "_id": {
+    "$oid": "6257b718c29536eb0385e9b3"
+  },
+  "username": "Nisa",
+  "password": "1234",
+  "authority": "writer",
+  "profile_pict_path": "Blog-Images-Forget-Machine-Learning-Humans-Still-Have-a-Lot-to-Learn-Part-II.jpg"
+},{
+  "_id": {
+    "$oid": "6257b723c29536eb0385e9b4"
+  },
+  "username": "Yusuf Syam",
+  "password": "1234",
+  "authority": "writer",
+  "profile_pict_path": "1_8.jpg"
+}]

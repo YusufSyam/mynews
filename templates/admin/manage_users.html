@@ -1,0 +1,60 @@
+{% extends '/base.html' %}
+
+{% block title %} Manage Users {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manageUserStyle.css') }}"> {% endblock %}
+
+{% block content %}
+{% for flash_category, flash_message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ flash_category }} myAlert" role="alert">
+    {{ flash_message }}
+</div>
+{% endfor %}
+<div class="manageHeaderSection">
+    <h3>Manage Users</h3>
+</div>
+<div class="container">
+    <div class="inputActionContainer">
+        <a class="myAction myInput" href="{{ url_for('input_user') }}"><span>Add a New User</span></a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Authority</th>
+                <!--                        <th>Uploaded Date</th>-->
+                <th>News Writed</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for idx, i in users %}
+            <tr>
+                <td>
+                    <img style="object-fit:cover; width: 130px; height: 130px; border-radius: 200px; border: 3px solid #99A799;"
+                        src="{{ url_for('static', filename= image_path) }}{% if i.profile_pict_path=='' %}{{ no_profile_picture_path }}{% else %}{{ i.profile_pict_path }}{% endif %}">
+                </td>
+                <td>{{i.username}}</td>
+                <td>{{i.authority}}</td>
+                <td>{{num_of_users_list[idx]}}</td>
+                <td class="actionContainer">
+                    <form action="{{url_for('update_user', user_id=i.pk)}}" method="post" class="d-inline">
+                        <button type="submit" class="myAction myUpdate">Edit</button>
+                    </form>
+
+                    <a class="myAction myUpdate"
+                        href="{{url_for('deleting_user', user_id=i.pk)}}"><span>Delete</span></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block additional_script %}
+
+{% endblock %}

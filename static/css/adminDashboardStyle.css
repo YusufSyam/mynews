@@ -1,0 +1,114 @@
+.ADContainer{
+    width:80%;
+    margin: auto;
+}
+
+.ADHeaderSection{
+    width: 90%;
+    margin: -50px auto 0;
+    /* margin: 40px auto; */
+  }
+  
+.ADHeaderSection .headerLogo .logo:nth-child(1){
+    font-size: 72px;
+    transition:500ms ease;
+    font-family: 'Brush Script MT', cursive;
+    margin: 0 20px 20px;
+    font-weight: bold;
+}
+
+.ADHeaderSection .headerLogo .logo span:nth-child(2){
+    color: #E2C2B9;
+}
+
+.ADHeaderSection .headerLogo i{
+    font-size: 8px;
+    color: #bbb;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.ADHeaderSection .headerLogo .subTitle{
+    font-size: 26px;
+    transition:500ms ease;
+    margin: 0 20px 20px;
+    font-weight: bold;
+    color: #999;
+}
+
+.ADHeaderSection .headerDesc{
+    margin-top: 30px;
+}
+
+.ADHeaderSection .headerImage{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.ADHeaderSection .headerImage img{
+    object-fit:cover;
+    width: 130px;
+    height: 130px;
+    border-radius: 200px;
+    border: 3px solid #99A799;
+    margin: auto;
+}
+
+.manageSection{
+    margin: 50px auto 10px;
+    width: 90%;
+}
+
+.manageHeader h4{
+	margin: 10px 10px 20px 10px;
+	font-weight: bold;
+}
+
+.manageDesc{
+  margin-left: 10px;
+}
+
+.manageNewsMore{
+    width: 96%;
+    text-decoration: none;
+}
+
+.manageNewsMore i{
+    font-size: 14px;
+    width: 36px !important;
+    height: 36px !important;
+    box-sizing: border-box;
+    margin: 20px 5px 20px 10px;
+    background-color: #99A799;
+    color: white;
+    padding: 11px;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.manageNewsMore i:nth-child(2){
+    font-size: 14px;
+    margin: 20px 5px 20px 10px;
+    background-color: #99A799;
+    color: white;
+    padding: 11px;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.ADHeaderSection a i{
+    padding: 11px 9px 11px 11px;
+}
+
+.manageNewsMore span{
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    margin-right: 10px;
+}
+
+.tab{
+    margin-left: 30px;
+}

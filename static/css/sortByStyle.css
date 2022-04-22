@@ -1,0 +1,234 @@
+.homeHeaderSection{
+  width: 90%;
+  margin: -50px auto 0;
+}
+
+.homeHeaderSection .headerLogo{
+    font-size: 72px;
+    transition:500ms ease;
+    font-family: 'Brush Script MT', cursive;
+    margin: 0 20px 20px;
+    font-weight: bold;
+}
+
+.homeHeaderSection .headerLogo span:nth-child(2){
+    color: #E2C2B9;
+  }
+
+.headerDesc{
+    width: 90%;
+    margin: 0px auto 20px;
+}
+
+.sortByHeaderSection{
+    margin-top: 80px;
+}
+
+.sortByHeaderSection h3{
+    font-weight: bold;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.sortByHeaderSection h3 span{
+    font-size: 24px !important;
+    color: #99A799;
+    margin-right: 10px;
+}
+
+.newsSection{
+	margin: 50px auto 10px;
+  width: 90%;
+}
+
+.newsHeader h4{
+	margin: 10px;
+	font-size: 20px !important;
+	font-weight: bold;
+	border: 4px solid #D3E4CD;
+	border-radius: 400px;
+	padding: 8px 0px 8px;
+	border-top: none;
+	border-right: none;
+    border-bottom-right-radius: 0px;
+}
+
+.newsHeader h4 span{
+    background-color: white;
+    color: #666;
+	border: 4px solid #D3E4CD;
+	border-radius: 400px;
+	padding: 6px 24px 6px;
+	margin-left: -4px;
+}
+
+.newsBody{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-left: 10px;
+}
+
+.newsContainer{
+  margin: 20px 10px;
+}
+
+.tagSection{
+  margin: 10px auto;
+  width: 90%;
+}
+
+.categoryList, .tagList{
+  width: 96%;
+  margin: auto;
+}
+
+.categorySection .categoryMore span, .tagSection .tagMore span{
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+}
+
+.tagList, .categoryList{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.perCategory{
+  background-color: #F2DDC1;
+  padding: 3px 12px 6px 12px;
+  border-radius: 100px;
+  margin: 10px 5px;
+}
+
+.perTag{
+  background-color: #D3E4CD;
+  padding: 5px 12px;
+  border-radius: 6px;
+  margin: 10px 5px;
+}
+
+.perTag span, .perCategory span{
+  font-size: 14px;
+  color: #333;
+}
+
+.perTag a, .perCategory a{
+  text-decoration: none !important;
+}
+
+.perTag span:nth-child(2){
+    display: inline-block;
+  min-width: 26px !important;
+  text-align: center;
+  background-color: #fdfdfd;
+  margin-left: 4px;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+.myCard{
+	width: 380px !important;
+  border-radius: 10px !important;
+  box-shadow: 0px 20px 25px -15px rgb(192, 192, 192);
+}
+
+.myCardImage{
+  object-fit: cover;
+  height: 253px !important;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform .5s ease;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+/*
+.myCardImage:hover{
+  transform: scale(1.5);
+} */
+
+.myCardImageAlt{
+  position: absolute;
+  text-align: center;
+  padding-top: 100px;
+
+  font-family: 'Brush Script MT', cursive;
+	font-weight: bold;
+  font-size: 40px;
+  color: white;
+  background-color: #99A799;
+  width: 100%;
+  height: 63%;
+  /* text-shadow:
+  0 0 2px #fff,
+  0 0 3px #fff,
+  0 0 5px #fff; */
+  border-color: red;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.myCardImageAlt span{
+  color: #E2C2B9 !important;
+}
+
+.myCardGradient{
+  content: '';
+  height: 253px !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 65%, rgb(31, 31, 31) 100%);
+  z-index: 2;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.myCardTitle{
+  display: flex;
+  position: absolute;
+  top: 48%;
+  left: 3%;
+  margin-right: 5px;
+  z-index: 3;
+  flex-direction: column-reverse;
+}
+
+.myCardTitle span{
+  color: white;
+  font-size: 18px;
+}
+
+.myCardDate{
+  font-size: 11px;
+  position: absolute;
+  right: 4%;
+  bottom: 2%;
+  color: #999;
+}
+
+.myCardText p{
+  height: 95px;
+ 	/* text-align: justify; */
+ 	font-size: 13px;
+ 	color: #888;
+ 	font-family: 'Trebuchet MS', serif !important;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.myCardText p a{
+  text-decoration: none;
+  font-family: Poppins, serif;
+ 	font-size: 12px;
+
+}
+
+.tab{
+  margin-left: 30px;
+}

@@ -1,0 +1,109 @@
+{% extends '/base.html' %}
+
+{% block title %} Read News {% endblock %}
+
+{% block main_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/newsDetailStyle.css') }}"> {% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- breadcrumb -->
+    <div class="content-header row">
+        <div class="content-header-right breadcrumbs-right breadcrumbs-top">
+            <div class="breadcrumb-wrapper">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ url_for('sort_by', type='category') }}">Category</a></li>
+                    <li class="breadcrumb-item"><a
+                            href="{{url_for('news_with', type= 'category', sub_type=category.category)}}">{{category.category}}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{selected_data.title}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <header>
+        <h1 class="heading-1">{{selected_data.title}}</h1>
+        <div class="sub-heading">
+            <p>{{todays_day}}, <span>{{todays_date}}</span></p>
+            <!--                    <p class="importent">your right to meow</p>-->
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="home">
+            <div class="left">
+                <img src="{{ url_for('static', filename= image_path) }}{% if selected_data.img_path=='' %}{{ no_image_path }}{% else %}{{ selected_data.img_path }}{% endif %}"
+                    class="home-img" alt="cat">
+            </div>
+
+            <div class="right">
+                <h3 class="heading-3">Latest News</h3>
+                <div class="lists">
+                    {% for i in latest_news %}
+                    <a class="list" href="{{url_for('read_news', news_id= i.pk)}}">
+                        <img src="{{ url_for('static', filename= image_path) }}{% if i.img_path=='' %}{{ 'default.JPG' }}{% else %}{{ i.img_path }}{% endif %}"
+                            alt="latest news">
+                        <p>{{ i.title }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="uploadedDate">Uploaded on {{selected_data.uploaded_date}}</div>
+        <article>
+            {% for i in content_list %}
+            <p>{{i}}</p>
+            {% endfor %}
+        </article>
+        <hr class="paragraphLine">
+        <div class="tagSection">
+            <div class="tagHeader">
+                <div>Tag Terkait :</div>
+            </div>
+            <div class="tagList">
+                {% for tag in selected_data.tags %}
+                <div class="perTag">
+                    <a href="{{url_for('news_with', type= 'tags', sub_type= tag)}}">
+                        <span>{{tag}}</span>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="writerSection">
+            <div class="writerName">Writer: {{writer.username}}</div>
+            <img
+                src="{{ url_for('static', filename= profile_path) }}{% if writer.profile_pict_path=='' %}{{ no_profile_picture_path }}{% else %}{{ writer.profile_pict_path }}{% endif %}">
+
+
+        </div>
+
+    </div>
+
+    <!--            <blockquote>-->
+    <!--                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quas et est odit mollitia dicta autem delectus veniam. Mollitia aspernatur dicta iste quo, esse odio voluptatibus unde in dolore veniam, aliquam nihil maiores laudantium perferendis nostrum enim totam odit nesciunt consequatur at atque recusandae? Eveniet, necessitatibus accusantium. Debitis natus dolores ratione soluta quos commodi nihil nostrum eum officiis optio a, nesciunt, molestiae tempora harum reiciendis labore, sint numquam quisquam dolor!-->
+    <!--            </blockquote>-->
+
+    <!--            <div class="cards">-->
+    <!--                <div class="card">-->
+    <!--                    <h4 class="heading-4">Title</h4>-->
+    <!--                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque eveniet dicta animi quisquam aut accusantium, maxime harum rerum in atque fugit veritatis placeat, aspernatur natus neque obcaecati aliquam molestiae asperiores.</p>-->
+    <!--                </div>-->
+
+    <!--                <div class="card">-->
+    <!--                    <h4 class="heading-4">Title</h4>-->
+    <!--                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa obcaecati expedita fugit cum explicabo itaque facilis quos, tempore nostrum sit, in eum commodi iusto! Iure repellendus beatae, odit vitae sunt et repudiandae laborum culpa repellat. Deserunt velit aspernatur corporis eaque!</p>-->
+    <!--                </div>-->
+
+    <!--                <div class="card">-->
+    <!--                    <h4 class="heading-4">Title</h4>-->
+    <!--                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus cumque natus reiciendis exercitationem repellendus nesciunt explicabo! Quisquam, eos reprehenderit quidem necessitatibus laboriosam ratione alias est atque. Reprehenderit nulla, vitae suscipit cumque sapiente ab esse distinctio illo possimus dignissimos architecto inventore dolores ipsa libero ullam necessitatibus. In fugit et aspernatur eveniet.</p>-->
+    <!--                </div>-->
+    <!--            </div>-->
+</div>
+{% endblock %}
+
+{% block additional_script %}
+
+{% endblock %}

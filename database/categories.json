@@ -1,0 +1,71 @@
+[{
+  "_id": {
+    "$oid": "6254590e7be5405255f1caad"
+  },
+  "category": "Sport"
+},{
+  "_id": {
+    "$oid": "6254591e7be5405255f1caae"
+  },
+  "category": "Health"
+},{
+  "_id": {
+    "$oid": "625459607be5405255f1cab0"
+  },
+  "category": "Automotive"
+},{
+  "_id": {
+    "$oid": "625459677be5405255f1cab1"
+  },
+  "category": "Food"
+},{
+  "_id": {
+    "$oid": "625459727be5405255f1cab2"
+  },
+  "category": "Travel"
+},{
+  "_id": {
+    "$oid": "62552d8aa0a2a4878994e050"
+  },
+  "category": "Politics"
+},{
+  "_id": {
+    "$oid": "62552dbca0a2a4878994e051"
+  },
+  "category": "Animal"
+},{
+  "_id": {
+    "$oid": "62552ddaa0a2a4878994e052"
+  },
+  "category": "Esport"
+},{
+  "_id": {
+    "$oid": "62552de5a0a2a4878994e053"
+  },
+  "category": "Technology"
+},{
+  "_id": {
+    "$oid": "62552e03a0a2a4878994e054"
+  },
+  "category": "Movies & Theaters"
+},{
+  "_id": {
+    "$oid": "62552e2ca0a2a4878994e055"
+  },
+  "category": "Religion"
+},{
+  "_id": {
+    "$oid": "62552e51a0a2a4878994e056"
+  },
+  "category": "Natural Disasters"
+},{
+  "_id": {
+    "$oid": "62552e7ea0a2a4878994e057"
+  },
+  "category": "Entertainment"
+},{
+  "_id": {
+    "$oid": "625fbb6c21c2b27a54c94c8a"
+  },
+  "category": "Military"
+}]
