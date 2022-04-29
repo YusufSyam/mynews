@@ -1,8 +1,8 @@
-# Web-flask
+# Mengimport library Web-flask
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from werkzeug.utils import secure_filename
 
-# Handling json data
+# Untuk mengcasting tipe data menjadi object id
 from bson import ObjectId
 
 # Helper Function
@@ -14,6 +14,7 @@ from utils.admin_manager import *
 from utils.json import *
 import os
 
+# Menyetel konfigurasi app flask
 app= Flask(__name__)
 
 app.config['MONGODB_SETTINGS']= {
@@ -22,6 +23,7 @@ app.config['MONGODB_SETTINGS']= {
 
 app.config['SECRET_KEY'] = 'kelompok 8 kelas A sistem basis data 2'
 
+# Menginisialisasikan konstan
 NEWS_IMAGE_DIR = 'img/news_image/'
 PROFILE_PICTURE_DIR = 'img/profile_picture/'
 NO_NEWS_IMAGE_PATH= 'default.JPG'
@@ -31,25 +33,34 @@ NEWS_PER_PAGE= 6
 
 db= set_db(app)
 
+# Halaman home
 @app.route('/')
 @app.route('/home/')
 def home():
-	global NEWS_IMAGE_DIR, NO_NEWS_IMAGE_PATH, NEWS_PER_PAGE
-
+	# Mendapatkan seberapa banyak berita yang ada di database
 	news_num= get_news_length()
+	# Menyetel jumlah pagination
 	pagination_num= news_num//NEWS_PER_PAGE if news_num%NEWS_PER_PAGE==0 else (news_num//NEWS_PER_PAGE) + 1
 
+	# Mendapatkan nilai page di url
 	page= request.args.get('page')
+	# Jika page tidak diisi maka setel menjadi 1
 	page= 1 if page is None else int(page)
+	# Menghandle jika nilai page tidak valid
 	if (page<1 or page>pagination_num):
 		return redirect(url_for('home'))
 
+	# Mendapatkan berita terbaru
 	latest_news= get_latest_news(page, NEWS_PER_PAGE)
+	# Mendapatkan berita terpopuler
 	most_popular_news= get_most_popular_news(NEWS_PER_PAGE)
+	# Mendapatkan list kategori yang ada di database
 	category_list = enumerate(get_all_categories())
 
+	# Mendapatkan tanggal hari ini
 	curr_date= get_todays_day()+', '+get_convenience_date_format()
 
+	# Mendapatkan top 10 tags
 	highest_tags= get_top_n_tags(10)
 
 	return render_template('user/home.html', latest_news=latest_news, page= page, news_per_pagination= NEWS_PER_PAGE, pagination_num= pagination_num, most_popular_news= most_popular_news, category_list= category_list, curr_date= curr_date, highest_tags= highest_tags, image_path= NEWS_IMAGE_DIR, no_image_path= NO_NEWS_IMAGE_PATH)
@@ -57,8 +68,6 @@ def home():
 
 @app.route('/read/<news_id>')
 def read_news(news_id=None):
-	global NEWS_IMAGE_DIR, NO_NEWS_IMAGE_PATH
-
 	if(news_id is None):
 		return redirect(url_for('home'))
 
@@ -78,8 +87,7 @@ def read_news(news_id=None):
 
 @app.route('/sort-by/<type>')
 def sort_by(type=None):
-	if(type in ['category', 'month_and_year', 'tags']):
-		global NEWS_IMAGE_DIR, NO_NEWS_IMAGE_PATH
+	if(type in ['category', 'month_and_year', 'tags'] and type is not None):
 		selected_data, sorted_by= get_sort_by(type)
 		tag_list= get_all_tags()
 		category_list = enumerate(get_all_categories())
@@ -92,10 +100,8 @@ def sort_by(type=None):
 
 @app.route('/news-with/<type>/<sub_type>')
 def news_with(type=None, sub_type=None):
-	if(type=='category' or type=='tags'):
+	if((type=='category' or type=='tags') and (type is not None and sub_type is not None)):
 		try:
-			global NEWS_IMAGE_DIR, NO_NEWS_IMAGE_PATH
-
 			selected_data, sorted_by= get_news_with(type, sub_type)
 			tag_list= get_all_tags()
 			category_list = enumerate(get_all_categories())
@@ -139,8 +145,6 @@ def logout():
 @app.route('/admin-dashboard/')
 @login_required
 def admin_dashboard():
-	global NO_PROFILE_PICTURE_PATH, PROFILE_PICTURE_DIR
-
 	user= current_user()
 	is_admin= logged_user_is_admin()
 	return render_template('admin/admin_dashboard.html', user= user, is_admin= is_admin, no_profile_picture_path= NO_PROFILE_PICTURE_PATH, image_path=PROFILE_PICTURE_DIR)
@@ -213,7 +217,6 @@ def deleting_category(category_id=None):
 @app.route('/manage-news/')
 @login_required
 def manage_news():
-	global NEWS_IMAGE_DIR, NO_NEWS_IMAGE_PATH
 	writer= current_user()
 
 	news= get_all_news() if logged_user_is_admin() else get_news_by_writer(writer)
@@ -275,7 +278,7 @@ def inserting_news():
 @app.route('/update-news/<news_id>', methods=['GET', 'POST'])
 @login_required
 def update_news(news_id=None):
-	if (news_id is None):
+	if news_id is None:
 		return redirect(url_for('home'))
 
 	selected_data = get_news_by_id(news_id)
@@ -296,6 +299,9 @@ def update_news(news_id=None):
 @app.route('/updating-news/<news_id>', methods=['POST'])
 @login_required
 def updating_news(news_id=None):
+	if news_id is None:
+		return redirect(url_for('home'))
+
 	if request.method=='POST':
 		update_news = get_news_by_id(news_id)
 		if (logged_user_is_admin() or logged_user_is_user(update_news.writer)):
@@ -351,8 +357,6 @@ def deleting_news(news_id=None):
 @login_required
 @admin_required
 def manage_users():
-	global PROFILE_PICTURE_DIR, NO_PROFILE_PICTURE_PATH
-
 	users = get_all_writers()
 	num_of_users_list = [len(get_news_by_writer(i)) for i in users]
 	users= enumerate(users)
@@ -364,7 +368,6 @@ def manage_users():
 @login_required
 @admin_required
 def input_user():
-	global PROFILE_PICTURE_DIR, NO_PROFILE_PICTURE_PATH
 	submit_type= 'input_user'
 	return render_template('admin/input_user.html', submit_type= submit_type, image_path= PROFILE_PICTURE_DIR, no_profile_picture_path= NO_PROFILE_PICTURE_PATH)
 
@@ -400,7 +403,6 @@ def inserting_user():
 @app.route('/update-user/<user_id>', methods=['GET', 'POST'])
 @login_required
 def update_user(user_id=None):
-	global NEWS_IMAGE_DIR
 	if user_id is not None :
 		selected_user = get_writer_by_id(user_id)
 		if (logged_user_is_admin() or logged_user_is_user(selected_user.pk)):
@@ -415,8 +417,6 @@ def update_user(user_id=None):
 @app.route('/updating-user/<user_id>', methods=['POST'])
 @login_required
 def updating_user(user_id=None):
-	global PROFILE_PICTURE_DIR
-
 	if (request.method=='POST' and user_id is not None):
 		update_user = get_writer_by_id(user_id)
 		if (logged_user_is_admin() or logged_user_is_user(update_user.pk)):
