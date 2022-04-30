@@ -70,7 +70,8 @@ def home():
 def read_news(news_id=None):
 	if(news_id is None):
 		return redirect(url_for('home'))
-
+        
+        # Mendapatkan berita yang dipilih berdasarkan id yang dipass di route
 	selected_data= get_news_by_id(news_id)
 	selected_data.update(read_count=selected_data.read_count + 1)
 	category= get_category_by_id(selected_data.category)
