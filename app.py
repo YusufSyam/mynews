@@ -75,8 +75,10 @@ def read_news(news_id=None):
 	selected_data= get_news_by_id(news_id)
 	# Meng-update jumlah baca berita yang dipilih
 	selected_data.update(read_count=selected_data.read_count + 1)
+	# Mendapatkan kategori dan penulis dari berita yang terpilih
 	category= get_category_by_id(selected_data.category)
 	writer= get_writer_by_id(selected_data.writer)
+	# Melakukan operasi string split berdasarkan baris baru pada berita yang terpilih
 	content_list= selected_data.content.split('\n')
 
 	latest_news= get_latest_news(limit=5)
