@@ -80,10 +80,13 @@ def read_news(news_id=None):
 	writer= get_writer_by_id(selected_data.writer)
 	# Melakukan operasi string split berdasarkan baris baru pada berita yang terpilih
 	content_list= selected_data.content.split('\n')
-
+	
+	# Mendapatkan 5 berita terakhir diupload
 	latest_news= get_latest_news(limit=5)
-
+	
+	# Mendapatkan hari apa saat ini
 	todays_day= get_todays_day()
+	# Mendapatkan tanggal saat ini dengan format yang telah ditentukan
 	todays_date= get_convenience_date_format()
 
 	return render_template('user/news_detail.html', selected_data= selected_data, category= category, writer= writer, content_list= content_list, latest_news= latest_news, todays_day= todays_day, todays_date= todays_date, image_path= NEWS_IMAGE_DIR, profile_path= PROFILE_PICTURE_DIR, no_image_path= NO_NEWS_IMAGE_PATH)
