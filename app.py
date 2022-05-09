@@ -94,6 +94,7 @@ def read_news(news_id=None):
 
 @app.route('/sort-by/<type>')
 def sort_by(type=None):
+	# Jika type yang di-pass type yang valid
 	if(type in ['category', 'month_and_year', 'tags'] and type is not None):
 		selected_data, sorted_by= get_sort_by(type)
 		tag_list= get_all_tags()
