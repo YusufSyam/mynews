@@ -96,8 +96,13 @@ def read_news(news_id=None):
 def sort_by(type=None):
 	# Jika type yang di-pass type yang valid
 	if(type in ['category', 'month_and_year', 'tags'] and type is not None):
+		# Mendapatkan data yang digrup berdasarkan setiap type (kategori, bulan dan tahun atau tags)
+		# Mendapatkan list type
 		selected_data, sorted_by= get_sort_by(type)
+		
+		# Mendapatkan list semua tags
 		tag_list= get_all_tags()
+		
 		category_list = enumerate(get_all_categories())
 		header_prefix= 'News sorted by '
 
