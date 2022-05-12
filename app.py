@@ -100,10 +100,11 @@ def sort_by(type=None):
 		# Mendapatkan list type
 		selected_data, sorted_by= get_sort_by(type)
 		
-		# Mendapatkan list semua tags
+		# Mendapatkan list semua tags dan kategori
 		tag_list= get_all_tags()
-		
 		category_list = enumerate(get_all_categories())
+		
+		# Mendefinisikan prefix header dari halaman
 		header_prefix= 'News sorted by '
 
 		return render_template('user/sort_by.html', selected_data= selected_data, sorted_by= sorted_by, type=type, header_prefix= header_prefix, category_list= category_list, tag_list= tag_list, image_path= NEWS_IMAGE_DIR, no_image_path= NO_NEWS_IMAGE_PATH)
