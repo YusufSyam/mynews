@@ -114,6 +114,7 @@ def sort_by(type=None):
 
 @app.route('/news-with/<type>/<sub_type>')
 def news_with(type=None, sub_type=None):
+        # Mengecek jika type dan sub type yang dipass valid
 	if((type=='category' or type=='tags') and (type is not None and sub_type is not None)):
 		try:
 			selected_data, sorted_by= get_news_with(type, sub_type)
